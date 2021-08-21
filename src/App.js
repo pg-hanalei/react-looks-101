@@ -2,14 +2,12 @@ import React, { useState } from 'react'
 
 const App = (props) => {
 
-  const [name, setName] = useState(props.name);
-  const [price, setPrice] = useState(props.price);
-  const onChangeText = (e) => setName(e.target.value)
-  const onChangePrice = (e) => setPrice(e.target.value)
-  const onClickReset = () => {
-    setPrice(0)
-    setName("");
-  }
+  const [state, setState] = useState(props);
+  const { name, price } = state;
+  const onChangeText = (event) =>  setState({...state, name: event.target.value})
+  const onChangePrice = (event) =>  setState({...state, price: event.target.value})
+  const onClickReset = () => setState(props);
+
   return(
     <>
       <p>現在の{name}は、{price}円です</p>
@@ -18,11 +16,11 @@ const App = (props) => {
       <button onClick={onClickReset}>reset</button>
     </>
   )
-}
+};
 
 App.defaultProps = {
   name: "",
-  price: 1000,
-}
+  price: 0,
+};
 
 export default App
