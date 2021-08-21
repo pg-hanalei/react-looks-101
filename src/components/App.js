@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 import reducer from '../reducers'; //indexは省略可
 
+import Event from './Event';
+
 const App = () => {
   const [state, dispatch] = useReducer(reducer, []);
   const [title, setTitle] = useState("");
@@ -19,6 +21,7 @@ const App = () => {
     setTitle("");
     setBody("");
   };
+
   return (
     <div className="container-fluid">
       <h4>イベント作成フォーム</h4>
@@ -38,7 +41,6 @@ const App = () => {
                     value={body}
                     onChange={ (e) => setBody(e.target.value)}/>
         </div>
-
         <button className="btn btn-primary" onClick={addEvent}>イベントを作成する</button>
         <button className="btn btn-danger">すべてのイベントを削除する</button>
       </form>
@@ -54,7 +56,7 @@ const App = () => {
           </tr>
         </thead>
         <tbody>
-
+        { state.map( ( event, map ) => <Event key={event.id} event={event} dispatch={dispatch} />  )}
         </tbody>
       </table>
     </div>
