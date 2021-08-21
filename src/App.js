@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const App = (props) => {
 
@@ -8,9 +8,25 @@ const App = (props) => {
   const onChangePrice = (event) =>  setState({...state, price: event.target.value})
   const onClickReset = () => setState(props);
 
+  //こっちが後 つまりレンダリングされた後に実行される
+  useEffect(()=>{
+    console.log('useEffect is invoked.')
+  },[]);
+
+  useEffect(()=>{
+    console.log('name.')
+  },[name]);
+
+
+  //こっちが先
+  const renderPeriod = () => {
+    console.log("renderPeriod")
+    return '。';
+  }
+
   return(
     <>
-      <p>現在の{name}は、{price}円です</p>
+      <p>現在の{name}は、{price}円です{renderPeriod()}</p>
       <input value={name} type="text" onChange={onChangeText}/>
       <input value={price} type="text" onChange={onChangePrice}/>
       <button onClick={onClickReset}>reset</button>
