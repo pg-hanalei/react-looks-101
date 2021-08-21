@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const App = () => {
+  const [ count, setCount ] = useState(0)
+  const onClickButton = () => setCount((prevCount) => prevCount + 1)
+  const onClickReset = () => setCount(0);
   return (
-    <div>
-      this is a tempalate for React app.
-    </div>
+    <>
+      <div>count : { count }</div>
+      <button onClick={onClickButton}>up</button>
+      <button onClick={onClickReset}>reset</button>
+    </>
   )
 }
 
