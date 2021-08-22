@@ -36,6 +36,7 @@ const App = () => {
 
   const unCreatable = title.trim() === "" || body.trim() === "";
 
+  console.log(state);
   return (
     <div className="container-fluid">
       <EventForm title={title} body={body} setTitle={setTitle} setBody={setBody} addEvent={addEvent}
