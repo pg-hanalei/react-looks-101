@@ -1,6 +1,7 @@
 import React, { useState, useReducer } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+import {CREATE_EVENT, DELETE_EVENT, DELETE_ALL_EVENTS} from "../actions";
 import reducer from '../reducers'; //indexは省略可
 
 import Event from './Event';
@@ -16,7 +17,7 @@ const App = () => {
     // dispatch(action)
     // action = { type: 'CREATE_EVENT', title, body}
     dispatch({
-      type: "CREATE_EVENT",
+      type: CREATE_EVENT,
       title,
       body,
     });
@@ -28,7 +29,7 @@ const App = () => {
     const result = window.confirm('すべてのイベントを削除しますか？');
     if(result){
       dispatch({
-        type: "DELETE_ALL_EVENT"
+        type: DELETE_ALL_EVENTS
       })
     }
   }
