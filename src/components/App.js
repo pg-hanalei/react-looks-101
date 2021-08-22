@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import reducer from '../reducers'; //indexは省略可
 
 import Event from './Event';
+import EventForm from './EventForm';
+import Events from "./Events";
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, []);
@@ -35,41 +37,10 @@ const App = () => {
 
   return (
     <div className="container-fluid">
-      <h4>イベント作成フォーム</h4>
-      <form>
-        <div className="form-group">
-          <label htmlFor="formEventTitle">タイトル</label>
-          <input id="formEventTitle"
-                 className="form-control"
-                 type="text"
-                 value={title}
-                 onChange={ (e) => setTitle(e.target.value)}/>
-        </div>
+      <EventForm title={title} body={body} setTitle={setTitle} setBody={setBody} addEvent={addEvent}
+                 unCreatable={unCreatable} deleteAllEvent={deleteAllEvent} state={state} />
 
-        <div className="form-group">
-          <label htmlFor="formEventBody">内容</label>
-          <textarea id="formEventBody" className="form-control"
-                    value={body}
-                    onChange={ (e) => setBody(e.target.value)}/>
-        </div>
-        <button className="btn btn-primary" onClick={addEvent} disabled={unCreatable}>イベントを作成する</button>
-        <button className="btn btn-danger" onClick={deleteAllEvent} disabled={state.length === 0}>すべてのイベントを削除する</button>
-      </form>
-
-      <h4>イベント一覧</h4>
-      <table className="table table-hover">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>タイトル</th>
-            <th>ボディー</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-        { state.map( ( event, map ) => <Event key={event.id} event={event} dispatch={dispatch} />  )}
-        </tbody>
-      </table>
+      <Events dispatch={dispatch} state={state} />
     </div>
   )
 }
