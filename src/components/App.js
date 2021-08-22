@@ -1,6 +1,9 @@
 import React, { useState, useReducer } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+import AppContext from "../contexts/AppContext";
+
+
 import {CREATE_EVENT, DELETE_EVENT, DELETE_ALL_EVENTS} from "../actions";
 import reducer from '../reducers'; //indexは省略可
 
@@ -36,14 +39,16 @@ const App = () => {
 
   const unCreatable = title.trim() === "" || body.trim() === "";
 
-  console.log(state);
+  console.log({AppContext});
   return (
-    <div className="container-fluid">
-      <EventForm title={title} body={body} setTitle={setTitle} setBody={setBody} addEvent={addEvent}
-                 unCreatable={unCreatable} deleteAllEvent={deleteAllEvent} state={state} />
+    <AppContext.Provider value={'HELLO, I AM PROVIDER'}>
+      <div className="container-fluid">
+        <EventForm title={title} body={body} setTitle={setTitle} setBody={setBody} addEvent={addEvent}
+                   unCreatable={unCreatable} deleteAllEvent={deleteAllEvent} state={state} />
 
-      <Events dispatch={dispatch} state={state} />
-    </div>
+        <Events dispatch={dispatch} state={state} />
+      </div>
+    </AppContext.Provider>
   )
 }
 
