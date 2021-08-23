@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import AppContext from "../contexts/AppContext";
+
 
 const EventForm = (props) => {
-  const { title, body, setTitle, setBody, addEvent, unCreatable, deleteAllEvent, state } = props;
+  const { title, body, setTitle, setBody, addEvent, unCreatable, deleteAllEvent, state } = useContext(AppContext);
+
   return (
     <>
       <h4>イベント作成フォーム</h4>

@@ -3,11 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 import AppContext from "../contexts/AppContext";
 
-
-import {CREATE_EVENT, DELETE_EVENT, DELETE_ALL_EVENTS} from "../actions";
+import {CREATE_EVENT , DELETE_ALL_EVENTS} from "../actions";
 import reducer from '../reducers'; //indexは省略可
 
-import Event from './Event';
 import EventForm from './EventForm';
 import Events from "./Events";
 
@@ -15,6 +13,7 @@ const App = () => {
   const [state, dispatch] = useReducer(reducer, []);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+
   const addEvent = (e) => {
     e.preventDefault();
     // dispatch(action)
@@ -39,13 +38,14 @@ const App = () => {
 
   const unCreatable = title.trim() === "" || body.trim() === "";
 
-  console.log({AppContext});
+  const store = {
+    state,title, body, setTitle, setBody, addEvent,
+    unCreatable, deleteAllEvent, dispatch
+  }
   return (
-    <AppContext.Provider value={'HELLO, I AM PROVIDER'}>
+    <AppContext.Provider value={store}>
       <div className="container-fluid">
-        <EventForm title={title} body={body} setTitle={setTitle} setBody={setBody} addEvent={addEvent}
-                   unCreatable={unCreatable} deleteAllEvent={deleteAllEvent} state={state} />
-
+        <EventForm  />
         <Events dispatch={dispatch} state={state} />
       </div>
     </AppContext.Provider>
